@@ -1,0 +1,7 @@
+cfglist_fbsd () {
+	local _server _cfg_path
+
+	_server="dst00.yandex.ru"
+	_cfg_path="/place/nalivki/FreeBSD/main/config/"
+	ssh ${_server} "ls '${_cfg_path}'"
+}

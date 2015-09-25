@@ -1,0 +1,16 @@
+#!/bin/bash
+
+sswhile () {
+	local _ssh_host
+	local _ssh_
+
+	_ssh_host="$1"
+	_ssh_options="ConnectTimeout=1"
+	_ssh_="ssh -o ${_ssh_options}"
+
+	printf "Waiting for ssh availability of '${_ssh_host}'"
+
+	while ! ${_ssh} "${@}"; do
+		true
+	done
+}

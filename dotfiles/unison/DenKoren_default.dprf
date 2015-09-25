@@ -1,0 +1,12 @@
+# Настройки по умолчанию для синхронизации моей папки DenKoren
+
+fastcheck = true
+perms = 0
+
+ignore = Name ___share
+ignore = Name __NokiaBKP
+ignore = Name Mail
+ignore = Name *.user
+ignore = Name QIPFiles
+
+include default.dprf

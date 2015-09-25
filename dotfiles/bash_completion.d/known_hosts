@@ -1,0 +1,4 @@
+complete -F _known_hosts set_host_vlan.sh
+complete -F _known_hosts get_host_mac.sh
+complete -F _known_hosts get_host_dc.sh
+complete -F _known_hosts host_query.sh

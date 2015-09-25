@@ -1,0 +1,56 @@
+###################
+## CROSSPLATFORM ##
+###################
+
+# grep - делаем вывод цветным
+alias grep="grep --colour=auto"
+
+# Приятный алиас для повторения команд
+alias r="fc -s" # r ssh повторит последнюю команду, начинающуюся с ssh
+
+# Человеко-понятный вывод размеров по-умолчанию
+alias df="df -h"
+alias du="du -h"
+alias free="free -m"
+
+# Подключиться к существующей сессии tmux или создать новую.
+alias tma="tmux -2 attach || tmux -2 new"
+
+# В нормальном режиме bpython выводит всё, что мы в него ввели, в stdout после закрытия.
+# Просим его не делать этого.
+alias bpython='bpython-curses -q'
+
+# Вместо встроенной cd используем функцию, хранящую историю переходов по папкам
+alias cd=cd_func
+
+
+###########
+## LINUX ##
+###########
+if [ "$(uname)" = "Linux" ]; then
+
+    # ls - делаем вывод цветным и создаем сокращенные варианты наиболее распространенных параметров
+    alias ls="ls --color=auto"
+    alias l="ls -FC"
+    alias la="ls -A"
+    alias ll="ls -Al"
+
+    # Нормально версионировать пакеты, не пытаться автоматически определить, является ли пакет NMU
+    alias dch='dch --distributor=debian --no-auto-nmu'
+    alias debuild='debuild --no-tgz-check'
+
+fi
+
+##############
+## Mac OS X ##
+##############
+
+if [ "$(uname)" = "Darwin" ]; then
+
+    # ls - делаем вывод цветным и создаем сокращенные варианты наиболее распространенных параметров
+    alias ls="ls -G"
+    alias l="ls -GFC"
+    alias la="ls -GA"
+    alias ll="ls -GAl"
+
+fi

@@ -1,0 +1,123 @@
+" vim: set foldmarker={,} foldlevel=3 foldmethod=marker:
+
+autocmd VimEnter * echo "denkoren's vimrc version: 0.1"
+" Notes {{{
+"   ***********************************************************************   "
+"   This is the personal .vimrc file of Denis Korenevskiy.                    "
+"   You can find me at http://github.com/denkoren                             "
+"   While much of it is beneficial for general use, I would                   "
+"   recommend picking out the parts you want and understand.                  "
+"   I had been inspired by Andrew Tropin (abcdw@) for this file creation, so  "
+"   you'll probably find much similarities to his vimrc file here.            "
+"   Thank you, Andrew!                                                        "
+"   ***********************************************************************   "
+" }}}
+
+" "General settings" {
+    " "Basic" {{
+        " "Uncategorized" {
+            set nocompatible
+            " let g:EclimCompletionMethod = 'omnifunc'  " read about that
+        " }
+        " "Interface" {
+            syntax on
+            set langmenu=en
+            set helplang=ru
+            set linespace=1
+            set ttyfast
+            set cursorline
+            set listchars=tab:▸\ ,trail:·,nbsp:+,eol:¶,nbsp:&,extends:>,precedes:>,conceal:~
+            set list
+            set display+=uhex
+            set display+=lastline
+            set number
+            set spelllang=ru_yo,en
+            set spell
+        " }
+       " "Files" {
+            set fileencodings=ucs-bom,utf-8,cp1251
+            "set fileformat=unix  " possibly not required ( :help 'fileformats' )
+       " }
+        " "Behaviour" {
+            set mouse=a
+            set backspace=indent,eol,start  " 'Regular' backspace behaviour: remove anything :)
+            set scrolloff=5
+            set sidescrolloff=15
+            set autoread
+            set autowrite
+            "set autochdir  " breaks some plugins
+            set virtualedit=block
+            set splitbelow
+            set splitright
+            set gdefault  " substitute all matches by default (in s/<a>/<b>/ expressions)
+            set keywordprg=:help  " open help by pressing 'K' in vim normal mode.
+            set nojoinspaces
+
+            "autocmd FilterWritePre * if &diff | setlocal wrap< | endif
+            "autocmd FileType * setlocal formatoptions-=o
+            "autocmd VimEnter * nested call SetupCtrlP()
+            "if has("autocmd")
+            "  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+            "        \| exe "normal! g'\"" | endif
+            "endif
+
+            "au BufWinLeave * mkview
+            "au BufWinEnter * silent loadview
+            "au FocusLost * :wa
+            "augroup reload_vimrc " {
+                "autocmd!
+                "autocmd BufWritePost $MYVIMRC source $MYVIMRC
+            "augroup END " }
+
+            "augroup helpfiles
+            " au!
+            " "au BufRead,BufEnter */doc/* wincmd L
+            " au BufRead */doc/* wincmd L
+            "augroup END
+        " }
+        " "Indentation and tabulation" {
+            set tabstop=4
+            set softtabstop=4
+            set shiftwidth=4
+            set shiftround
+            set expandtab
+            set smarttab
+            set autoindent
+            set smartindent
+            set cindent
+        " }
+        " "Line wrapping" {
+            set wrap
+            set linebreak
+            "set breakindent
+            if has('multi_byte')
+                let &showbreak = '↳ '
+            else
+                let &showbreak = '> '
+            endif
+        " }
+        " "Search" {
+            set showmatch
+            set hlsearch
+            set incsearch
+            set ignorecase
+            set smartcase
+        " }
+        " "Status bar and command line settings" {
+            " set cmdheight=1       " Size of command line window in lines
+            set laststatus=2        " Always show status bar
+            set report=0            " Always report about changes for ':' commands
+            set ruler               " Show cursor position
+            set shortmess=aoOtT     " Shorten status messages. Look at :help 'shortmess' for additional info
+            set showmode            " Show mode changes (Insert, Visual, Replace, etc) in last line of vim window
+            set showcmd             " Show command in the last line of the screen
+        " }
+        " "Command line completion" {
+            set wildchar=<Tab>      " Command line completion character. It defaults to <Tab> in vim non-compatible mode, so this option probably has no effect here.
+            set wildmenu            " Show possible completions in line above the command
+            set wildmode=longest:full
+
+            " Don't complete some file names:
+            set wildignore+=*.o,*.obj,*.pyc,*.pyo,*.pyd,*.class,*.lock  " python
+            set wildignore+=*.png,*.gif,*.jpg,*.ico                     " images
+        " }

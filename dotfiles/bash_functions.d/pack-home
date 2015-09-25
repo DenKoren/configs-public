@@ -1,0 +1,33 @@
+#!/bin/sh
+
+unpack-home() {
+	local _system_type _current_dir
+
+	_system_type="${1}"
+	_current_dir="${PWD}"
+	
+
+	if echo "${HOME}" | grep -q "denkoren" && cd "${HOME}"; then
+		rm -rf "denkoren"
+		tar xf denkoren_${_system_type}.tar
+		cd "${_current_dir}"
+	else
+		echo "Some error occured." >&2
+	fi
+}
+
+pack-home() {
+	local _system_type _current_dir
+
+	_system_type="${1}"
+	_current_dir="${PWD}"
+	
+
+	if echo "${HOME}" | grep -q "denkoren" && cd "${HOME}"; then
+		tar cf denkoren_${_system_type}.tar denkoren
+		cd "${_current_dir}"
+	else
+		echo "Some error occured." >&2
+	fi
+}
+

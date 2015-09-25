@@ -1,0 +1,37 @@
+#!/bin/sh
+
+__get_instance_dir() {
+	local _instance_pattern
+	
+	_instance_pattern="${1}"
+
+	command bsconfig list \
+	    | awk -F ' :' "/${_instance_pattern}/{print \$1}" \
+	    | head -n 1
+}
+
+__get_shard_dir() {
+	local _shard_pattern
+
+	_shard_pattern="${1}"
+
+	command bsconfig list \
+	    | awk "/IndexDir/ && /${_shard_pattern}/ {print \$2}" \
+	    | head -n 1
+}
+
+cdinstance() {
+	local _instance_pattern
+
+	_instance_pattern="${1}"
+
+	cd "$(__get_instance_dir "${_instance_pattern}")"
+}
+
+cdshard() {
+	local _shard_pattern
+
+	_shard_pattern="${1}"
+
+	cd "$(__get_shard_dir "${_shard_pattern}")"
+}

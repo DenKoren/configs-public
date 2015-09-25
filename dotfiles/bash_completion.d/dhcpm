@@ -1,0 +1,67 @@
+__get_remote_file_list () {
+	local _server _path
+	_server="${1}"
+	_path="${2}"
+
+	#ssh ${_server} "ls '${_path}'"
+	if echo "${_server}" | grep "linux"; then
+	    cat "${HOME}/temp/cfglist_linux";
+	else
+	    cat "${HOME}/temp/cfglist_freebsd";
+	fi
+
+}
+__cfglist_freebsd () {
+	__get_remote_file_list \
+	    "dst00.yandex.ru" \
+	    "/place/nalivki/FreeBSD/main/config/"
+}
+
+__cfglist_linux () {
+	__get_remote_file_list \
+	    "linux.yandex.ru" \
+	    "/place/lui/src/config"
+}
+
+_dhcpm_complete ()
+{
+    # Объявляем переменные
+    local _current _previous _is_linux
+
+    # Инициализируем
+    _current="${COMP_WORDS[COMP_CWORD]}"
+    if [ "${COMP_CWORD}" -gt "1" ]; then
+	_previous="${COMP_WORDS[COMP_CWORD-1]}"
+    fi
+    _is_linux=false
+    COMPREPLY=()
+
+    for ((i=0; i<"${#COMP_WORDS}"; i++)); do
+	case "${COMP_WORDS[${i}]}" in
+	-L)
+		_is_linux=true
+		;;
+	esac
+    done
+
+    # Дополняем только опцию -s
+    if [ "${_previous}" == "-s" ]; then
+        COMPREPLY=(
+            $(cut -d " " -f 1 ${HOME}/.ssh/known_hosts \
+                | tr "," "\n" \
+                | grep "^${current}")
+            $(awk '
+                {
+                    n = split($0,a);
+                    if (match($0,"^(#|$)")==0)
+                        for (k=2; k<=n; k+=1)
+                            print(a[k])
+                }' /etc/hosts \
+                | sort -u \
+                | grep "^${current}")
+            )
+    fi
+    return 0
+}
+
+#complete -F _dhcpm_complete dhcpm

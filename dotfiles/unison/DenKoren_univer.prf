@@ -1,0 +1,10 @@
+# Синхронизация учебы
+key = 4
+label =  Univercity folder synchronization with Moscow PC
+
+root = /Users/DenKoren/Documents/
+root = ssh://192.168.2.121//cygdrive/d/DenKoren/
+
+path = _Documents/_Univercity/
+
+include DenKoren_default.dprf

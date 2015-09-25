@@ -1,0 +1,10 @@
+_pack_home_complete ()
+{
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $( printf 'freebsd\nlinux\n' | grep "${cur}" ) )
+    return 0
+}
+
+complete -F _pack_home_complete pack-home unpack-home

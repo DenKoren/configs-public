@@ -1,0 +1,30 @@
+# делать резервные копии всех файлов
+backup = Name *
+backupdir = .unison_backup
+
+# журнал никогда не был лишним
+log = true
+logfile = /Users/DenKoren/.unison/unison.log
+
+# шаблоны файлов которые будут игнорированы
+ignore = Name temp.*
+ignore = Name *.tmp
+ignore = Name *~
+ignore = Name ~$*
+# Mac OS X - specific
+ignore = Name .DS_Store
+# vim temporary files
+ignore = Name .*.swp
+# Log files
+ignore = Name *.log
+# LaTeX temporary files
+ignore = Name *._log
+ignore = Name *.aux
+ignore = Name *._aux
+ignore = Name *.toc
+ignore = Name *.synctex.gz
+ignore = Name *.out
+ignore = Name *.bbl
+ignore = Name *.blg
+
+auto = true

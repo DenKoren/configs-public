@@ -1,0 +1,9 @@
+# Профиль для синхронизации компа и ноута
+
+label =  All my folders synchronization with Moscow PC
+key = 1
+
+root = /Users/DenKoren/Documents/
+root = ssh://192.168.2.121/Documents/
+
+include DenKoren_default.dprf

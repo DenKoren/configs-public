@@ -1,0 +1,2 @@
+export PYTHONSTARTUP="${HOME}/.pyrc"
+export PYTHONIOENCODING="UTF-8"

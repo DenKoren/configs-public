@@ -1,0 +1,17 @@
+# This function requires 'functions.sh' to be loaded.
+
+ssh-forget() {
+	local _host
+	local _ip4 _ip6
+
+	_host="${1}"
+	
+	_ip4="$(fn_get_host_ip4 "${_host}")"
+	_ip6="$(fn_get_host_ip6 "${_host}")"
+
+	ssh-keygen -R "${_host}"
+	ssh-keygen -R "${_ip4}"
+	ssh-keygen -R "${_ip6}"
+}
+
+complete -F _known_hosts ssh-forget

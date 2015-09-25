@@ -1,0 +1,6 @@
+_current_proxy ()
+{
+    ps -xo command | awk '/^ssh -D 8080 -f -N/{print $6;}'
+}
+
+complete -C _current_proxy stop_proxy

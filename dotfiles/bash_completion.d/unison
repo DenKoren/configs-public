@@ -1,0 +1,34 @@
+_unison ()
+{
+    # Объявляем переменные
+    local current previous unisonprofiles
+    COMPREPLY=()
+
+    # Инициализируем
+    current=${COMP_WORDS[COMP_CWORD]}
+    # Если параметр уже не первый, то запоминаем и следующий
+    [[ "${COMP_CWORD}" -gt "0" ]] && previous=${COMP_WORDS[COMP_CWORD-1]}
+    unisonprofiles=${UNISON:-"${HOME}/.unison/"}
+
+    # Если мы вводим опцию, то предложи список опций, иначе предложи профиль
+    if [ "${current:0:1}" = "-" ]
+    then
+        COMPREPLY=( $(unison -help | sed -n -E "s/^ *-([a-zA-Z]*) .*/-\1/gp" | grep "^${current}") )
+    else
+        case ${previous} in
+            -log) COMPREPLY=( $(compgen -W "true false" | grep "^${current}" ) ) ;;
+            -logfile) COMPREPLY=( $(compgen -f ${current} ) ) ;;
+            -links) COMPREPLY=( $(compgen -W "true false default" | grep "^${current}" ) ) ;;
+            -fastcheck) COMPREPLY=( $(compgen -W "true false default" | grep "^${current}" ) ) ;;
+            -debug) COMPREPLY=( $(compgen -W "all more" | grep "^${current}" ) ) ;;
+            -backuploc) COMPREPLY=( $(compgen -W "central local" | grep "^${current}" ) ) ;;
+            -confirmbigdel) COMPREPLY=( $(compgen -W "true false" | grep "^${current}" ) ) ;;
+            -ignore*) ;;
+            -no*) ;;
+            *) COMPREPLY=( $(ls ${unisonprofiles} | sed -n "s/\.prf$//p" | grep "^${current}") ) ;;
+        esac
+    fi
+    return 0
+}
+
+complete -F _unison unison

@@ -1,0 +1,11 @@
+# Синхронизация папки с работой
+
+label =  Work folder synchronization with Moscow PC
+key = 3
+
+root = /Users/DenKoren/Documents
+root = ssh://192.168.2.121//cygdrive/d/DenKoren/
+
+path = work
+
+include DenKoren_default.dprf

@@ -1,0 +1,19 @@
+start_proxy ()
+{
+	local _server
+
+	_server="${1}"
+
+	ssh -D 8080 -f -N "${_server}"
+	networksetup -setsocksfirewallproxystate "USB Ethernet" on
+}
+
+stop_proxy ()
+{
+	local _server
+
+	_server="${1}"
+
+	networksetup -setsocksfirewallproxystate "USB Ethernet" off
+	pkill -f "ssh -D 8080 -f -N ${_server}"
+}

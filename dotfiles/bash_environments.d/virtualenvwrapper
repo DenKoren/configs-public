@@ -1,0 +1,6 @@
+# Python virtualenv wrapper.
+if [ -r /usr/local/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=~/.virtualenvs
+    export PROJECT_HOME=~/temp
+    source /usr/local/bin/virtualenvwrapper.sh
+fi

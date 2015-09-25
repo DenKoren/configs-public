@@ -1,0 +1,25 @@
+load_key() {
+    local _key_name
+
+    _key_name="${1}"
+
+    if echo "${_key_name}" | grep -q '/'; then
+        # Try to load key by path
+        test -r "${_key_name}" \
+            && ssh-add "${_key_name}"
+    else
+        # Try to load key from home .ssh directory by name.
+        test -r "${HOME}/.ssh/${_key_name}" \
+            && ssh-add "${HOME}/.ssh/${_key_name}"
+    fi
+}
+
+_load_key_complete() {
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $( ls "${HOME}/.ssh/" | grep "${cur}" ) )
+    return 0
+}
+
+complete -F _load_key_complete load_key

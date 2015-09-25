@@ -1,0 +1,13 @@
+# Для команд работы с заданиями показываются номера заданий, предваряемые символом "%"
+complete -A signal kill -P '%'
+complete -A stopped -P '%' bg
+complete -j -P '%' fg jobs disown
+
+# Подстановка переменных окружения
+complete -v export local readonly unset
+
+# Подстановка параметров встроенных команд
+complete -A setopt set
+complete -A shopt shopt
+complete -a unalias
+complete -A binding bind

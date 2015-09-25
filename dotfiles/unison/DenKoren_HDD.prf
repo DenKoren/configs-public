@@ -1,0 +1,8 @@
+# Синхронизация папки DenKoren с внешним хардом
+label = Sync with external HDD
+key = 2
+
+root = /Users/DenKoren/Documents/
+root = /Volumes/DenKoren/DenKoren/
+
+include DenKoren_default.dprf

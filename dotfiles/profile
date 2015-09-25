@@ -1,0 +1,81 @@
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+	# include .bashrc if it exists
+	if [ -f "$HOME/.bashrc" ]; then
+		. "$HOME/.bashrc"
+	fi
+fi
+
+# Let's define function to add some path's to PATH variable:
+__profile_add_to_path ()
+{
+	local _path_to_add
+	_path_to_add="${1}"
+
+	if [ -d "${_path_to_add}" ]; then
+		if echo ${PATH} | grep -vq "${_path_to_add}"; then
+			PATH="${_path_to_add}:${PATH}"
+		fi
+	fi
+}
+# CDPATH defines PATH's to search directories, given to 'cd'. Sometimes it useful.
+__profile_add_to_cdpath ()
+{
+	local _path_to_add
+	_path_to_add="${1}"
+
+	if [ -d "${_path_to_add}" ]; then
+		if echo ${CDPATH} | grep -vq "${_path_to_add}"; then
+			CDPATH="${_path_to_add}:${CDPATH}"
+		fi
+	fi
+}
+
+# Add sbin to PATH, because default PATH in MacOS X does not contain this folder.
+if uname | grep -qi darwin; then
+    __profile_add_to_path "/usr/local/sbin"
+fi
+# set PATH so it includes user's private bin if it exists
+__profile_add_to_path "$HOME/bin"
+# set PATH so it includes MacPorts bins if they exist
+__profile_add_to_path "/opt/local/bin"
+__profile_add_to_path "/opt/local/sbin"
+# set PATH so it includes BasicTeX binaries
+__profile_add_to_path "/usr//local/texlive/2012basic/bin/universal-darwin"
+# set PATH so it includes /Berkanavt scripts folder
+__profile_add_to_path "/Berkanavt/webscripts/admscripts/scripts"
+# set PATH so it includes Dropbox scripts folder
+__profile_add_to_path "${HOME}/Dropbox/scripts"
+__profile_add_to_path "${HOME}/Dropbox/scripts/sshuttle"
+# home scripts (just work)
+__profile_add_to_path "${HOME}/scripts"
+
+# add 'yandex' projects directory to CDPATH.
+__profile_add_to_cdpath "${HOME}/temp/yandex"
+
+export PATH
+export CDPATH
+
+export BLOCKSIZE=K
+export EDITOR=vim
+export PAGER=less
+
+# Nimbula API environment
+export NIMBULA_API="http://api.nimbula.search.yandex.net/"
+#export NIMBULA_USER="/seege/denkoren"
+
+export SVN_SSH="ssh -q -l denkoren"
+
+case $(uname) in
+[Ll]inux*)
+	export LANG="ru_RU.utf8"
+	;;
+*)
+	export MM_CHARSET=UTF-8
+	export LANG="ru_RU.UTF-8"
+	;;
+esac
