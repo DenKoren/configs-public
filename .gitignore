@@ -1,0 +1,12 @@
+# Common temporary files
+*.tmp
+*~
+~$*
+temp.*
+
+# Editors temp files
+.*.swp
+.*.swo
+
+# Logs
+*.log

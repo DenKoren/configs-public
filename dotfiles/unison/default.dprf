@@ -4,7 +4,6 @@ backupdir = .unison_backup
 
 # журнал никогда не был лишним
 log = true
-logfile = /Users/DenKoren/.unison/unison.log
 
 # шаблоны файлов которые будут игнорированы
 ignore = Name temp.*
