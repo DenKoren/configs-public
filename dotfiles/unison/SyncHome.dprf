@@ -1,0 +1,13 @@
+# List of files and directories to sync.
+path = .bash_aliases
+path = .bash_completion
+path = .bash_completion.d
+path = .bash_environments.d
+path = .bash_functions.d
+path = .bashrc
+path = .gitconfig
+path = .profile
+path = .pyrc
+path = .vimrc
+
+include default.dprf
