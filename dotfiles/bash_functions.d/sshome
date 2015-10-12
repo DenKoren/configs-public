@@ -1,68 +1,30 @@
 #!/bin/bash
 
-sshome_make_archive() {
-	local _archive _files_to_copy _exclude_pat
-
-	_archive="${1}"
-
-	_files_to_copy=(
-	    ".bash_aliases"
-	    ".bash_completion"
-	    ".bash_completion.d"
-	    ".bash_environments.d"
-	    ".bash_functions.d"
-	    ".bashrc"
-	    ".gitconfig"
-	    ".profile"
-	    ".screenrc"
-	    ".unison/*.prf"
-	    ".vim"
-	    ".vimrc"
-	)
-
-	_exclude_pat="*backup*"
-
-	tar -c --exclude="${_exclude_pat}" \
-	    -C "${HOME}" \
-	    -Lzf "${_archive}" \
-	    ${_files_to_copy[*]}
+update_home() {
+	set -ue
+	if [ -d "${HOME}/configs" ]; then
+		(
+		    command cd "${HOME}/configs/"
+		    command git pull
+		)
+	else
+		(
+		    command cd "${HOME}"
+		    command git clone git@github.com:DenKoren/configs.git || git clone https://github.com/DenKoren/configs.git
+		    command make --makefile "${HOME}/configs/dotfiles/Makefile" common
+		)
+	fi
 }
 
 sshome () {
-	local _ssh_hostname
-	local _ssh_ _ssh_options _public_key _archive _excludes _tmpscript
-
-	_excludes="(.ssh|.bash_history|.dupload.conf|.gnupg)"
-
-	_ssh_hostname="$1"
-	_ssh_options="ConnectTimeout=5"
-	_ssh_="ssh -o ${_ssh_options} ${@}"
-
-	_public_key=$(cat ${HOME}/.ssh/id_rsa.pub)
-
-	printf "'Homing' ${_ssh_hostname}: "
-
-	_tmpscript="$(mktemp -t sshome.XXXXXX)"
-	cat > "${_tmpscript}" << EOF
-	rm -rf \$(ls -A \${HOME}/ | egrep -v '${_excludes}');
-	mkdir -p \${HOME}/.ssh \
-	    && chmod 0750 \${HOME}/ \
-	    && echo '${_public_key}' > \${HOME}/.ssh/authorized_keys \
-	    && chown -Rf \${USER} \${HOME} \
-	    && chmod 0700 \${HOME}/.ssh \
-	    && chmod 0600 \${HOME}/.ssh/authorized_keys
-EOF
-
-	if cat "${_tmpscript}" | ${_ssh_} "sh"; then
-		_archive="${TMPDIR}/${USER}.tar.gz"
-		sshome_make_archive "${_archive}"
-
-		cat "${_archive}" \
-		    | ${_ssh_} -C "cat > \${HOME}/\${USER}.tar.gz"
-		${_ssh_} "tar xozf \${USER}.tar.gz 2>/dev/null \
-			&& rm \${USER}.tar.gz"
-		rm "${_archive}"
-
-		printf "done\n"
+	if [ "$#" -gt "0" ]; then
+		(
+		    declare -f update_home;
+		    echo update_home
+		) | ssh "${@}" 'sh -x'
+	else
+		update_home
 	fi
 }
+
+complete -F _known_hosts sshome

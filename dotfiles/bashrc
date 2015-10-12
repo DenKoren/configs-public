@@ -156,5 +156,6 @@ export GREP_COLOR=$'\033[7'
 #    load_key "<key_file_name>"
 #  для добавления ключика по пути:
 #    load_key "<key_file_path>"
-load_key 'id_infiniamena_jino.priv'
+load_key 'id_infiniamena'
+load_key 'id_bmstu'
 
