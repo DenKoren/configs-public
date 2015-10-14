@@ -36,6 +36,9 @@ applications-requirements: productivity \
                            messangers \
                            requireapp-KeePassX \
                            requireapp-Dropbox \
+                           requireapp-Yandex.Disk \
+                           requireapp-VLC \
+                           requireapp-Wunderlist \
                            requireapp-XCode
 
 karabiner: requireapp-Karabiner
