@@ -10,7 +10,7 @@ update_home() {
 	else
 		(
 		    command cd "${HOME}"
-		    command git clone git@github.com:DenKoren/configs.git || git clone https://github.com/DenKoren/configs.git
+		    command git clone https://github.com/DenKoren/configs.git
 		    command make --makefile "${HOME}/configs/dotfiles/Makefile" common
 		)
 	fi
