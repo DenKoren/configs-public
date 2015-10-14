@@ -44,8 +44,10 @@
     && for f in $(find /opt/local/etc/bash_completion.d/*); do
         . ${f};
     done
-# Из homebrew
-[[ -f $(brew --prefix)/etc/bash_completion ]] && . $(brew --prefix)/etc/bash_completion
+# Из homebrew (не подгружать ничего, если brew не установлен)
+command -v brew >/dev/null  \
+    && [[ -f $(brew --prefix)/etc/bash_completion ]]  \
+    && . $(brew --prefix)/etc/bash_completion
 
 # Из домашки
 [[ -f ${HOME}/.bash_completion ]] && . ${HOME}/.bash_completion
