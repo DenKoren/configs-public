@@ -39,6 +39,7 @@ applications-requirements: productivity \
                            requireapp-Yandex.Disk \
                            requireapp-VLC \
                            requireapp-Wunderlist \
+                           requireapp-VirtualBox \
                            requireapp-XCode
 
 karabiner: requireapp-Karabiner
