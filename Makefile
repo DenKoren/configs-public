@@ -13,7 +13,13 @@ require-%:
 	@echo "Checking requirement: '$*'"
 	@which $*
 
-install-vim:
+install-powerline-fonts:
+	@git clone https://github.com/powerline/fonts.git
+	@./fonts/install.sh
+	@echo "Removing fonts installation directory"
+	@rm -rf ./fonts
+
+install-vim: install-powerline-fonts
 	brew install --override-system-vi vim
 
 install-%:
