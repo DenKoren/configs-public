@@ -23,6 +23,17 @@ alias bpython='bpython-curses -q'
 # Вместо встроенной cd используем функцию, хранящую историю переходов по папкам
 alias cd=cd_func
 
+# TheFuck
+command -v thefuck >/dev/null \
+    && eval $(thefuck --alias) && alias f='fuck'
+
+#
+# GIT
+#
+alias gist='git status'
+alias gidi='git diff'
+alias gia='git add'
+alias gicm='git checkout master'
 
 ###########
 ## LINUX ##

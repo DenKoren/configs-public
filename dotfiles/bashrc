@@ -160,4 +160,5 @@ export GREP_COLOR=$'\033[7'
 #    load_key "<key_file_path>"
 load_key 'id_infiniamena'
 load_key 'id_bmstu'
+load_key 'id_yorso'
 
