@@ -10,3 +10,5 @@ temp.*
 
 # Logs
 *.log
+
+# .pyc
