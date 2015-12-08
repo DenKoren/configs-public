@@ -24,11 +24,14 @@ py: ln-pyrc
 
 vim: ln-vimrc
 
+mysql: ln-my.cnf
+
 unison: ln-unison
 
 common: configurations \
         bash \
         py \
+        mysql \
         vim
 
 server: common
