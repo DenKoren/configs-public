@@ -22,6 +22,9 @@ install-powerline-fonts:
 install-vim: install-powerline-fonts
 	brew install --override-system-vi vim
 
+install-mas:
+	brew install argon/mas/mas
+
 install-%:
 	brew install $*
 
@@ -56,7 +59,9 @@ applications: applications-requirements \
 
 packages: require-brew \
           install-bash-completion \
+          install-bash-git-prompt \
           install-git \
-          install-vim
+          install-vim \
+          install-mas
 
 all: packages
