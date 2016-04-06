@@ -1,16 +1,19 @@
 [user]
 	name = Korenevskiy Denis
-	email = denkoren@yandex.ru
+	email = denkoren@corp.badoo.com
 [color]
 	ui = true
 #[merge]
 #        tool = vimdiff
 [core]
 	editor = vim
+	ignorecase = false
 [alias]
 	unstage = reset HEAD --
-	last = log -1 HEAD
+	unst    = reset HEAD --
+	last    = log -1 HEAD
 	logtree = log --graph
 	co = checkout
+	st = status
 [push]
 	default = simple
