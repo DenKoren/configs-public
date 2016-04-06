@@ -74,6 +74,7 @@ command -v brew >/dev/null  \
 # История команд
 HISTSIZE=1000
 HISTFILESIZE=2000
+HISTTIMEFORMAT="%d/%m/%y %T "
 # Не добавлять в историю дубликаты команд,
 # не добавлять в историю команды, начинающиеся с пробела
 HISTCONTROL=ignoredups:ignorespace
@@ -153,12 +154,4 @@ export GREP_COLOR=$'\033[7'
 #### КОМАНДЫ ####
 #################
 
-# Добавление дополнительных ключиков в ssh-agent.
-#  для добавления ключика из .ssh домашней директории:
-#    load_key "<key_file_name>"
-#  для добавления ключика по пути:
-#    load_key "<key_file_path>"
-load_key 'id_infiniamena'
-load_key 'id_bmstu'
-load_key 'id_yorso'
-
+fish
