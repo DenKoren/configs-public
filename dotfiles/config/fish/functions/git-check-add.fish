@@ -10,6 +10,10 @@ function git-check-add --description 'Check git diff before adding a file'
 		echo ""
 	end
 
+	function __format_file
+		phpcf apply $argv
+	end
+
 	function __get_modified_files
 		git status --porcelain | awk '/^[^R]M /{print substr($0, 4);}'
 		git status --porcelain | awk -F ' -> ' '/^RM /{print $2;}'
@@ -30,6 +34,7 @@ function git-check-add --description 'Check git diff before adding a file'
 
 	for _file in (__get_modified_files)
 		__announce_section "File $_file"
+		__format_file $_file
 		git diff $_file
 		read -l -p __get_confirmation_prompt correct
 

@@ -1,0 +1,3 @@
+i# To download shell integration script:
+#   curl -SsL https://iterm2.com/misc/bash_startup.in > "${HOME}/.iterm2_shell_integration.bash"
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
