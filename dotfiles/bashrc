@@ -154,4 +154,4 @@ export GREP_COLOR=$'\033[7'
 #### КОМАНДЫ ####
 #################
 
-fish
+command -v fish >/dev/null && fish
