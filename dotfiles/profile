@@ -70,3 +70,10 @@ case $(uname) in
 	export LANG="ru_RU.UTF-8"
 	;;
 esac
+
+#
+# I don't know why, but it works only when it is loaded at the end of .profile.
+#
+# To download shell integration script:
+#   curl -SsL https://iterm2.com/misc/bash_startup.in > "${HOME}/.iterm2_shell_integration.bash"
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
