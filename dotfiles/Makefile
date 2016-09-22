@@ -10,6 +10,11 @@ ln-%:
 	@rm -f "$(HOME)/.$*"
 	@ln -fFs "$(mkfile_dir)/$*" "$(HOME)/.$*"
 
+ln-karabiner.d:
+	@echo "Linking '$(mkfile_dir)/.karabiner.d/configuration' to '$(HOME)/.karabiner.d/configuration'"
+	@rm -rf "$(HOME)/.karabiner.d/configuration"
+	@ln -fFs "$(mkfile_dir)/.karabiner.d/configuration" "$(HOME)/.karabiner.d/configuration"
+
 configurations: ln-config
 
 bash: ln-profile \
@@ -18,7 +23,8 @@ bash: ln-profile \
       ln-bash_completion \
       ln-bash_completion.d \
       ln-bash_functions.d \
-      ln-bash_environments.d
+      ln-bash_environments.d \
+      ln-karabiner.d
 
 py: ln-pyrc
 

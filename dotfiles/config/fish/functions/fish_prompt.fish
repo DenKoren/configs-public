@@ -89,9 +89,16 @@ function fish_prompt --description 'Write out the prompt'
 		)
 	end
 
+	set -l current_py_venv
+	if set -q VIRTUAL_ENV
+		set current_py_venv ' {'(basename "$VIRTUAL_ENV")'}'
+		echo -n -s " "
+	end
+
 	echo -n -s \
 		"[$current_time]" ' '\
 		(set_color $color_cwd) (prompt_pwd) $normal \
+		(set_color white) "$current_py_venv" $normal \
 		(__fish_git_prompt) $normal \
 		\n \
 		(set_color $fish_color_user) "$USER" $normal \
