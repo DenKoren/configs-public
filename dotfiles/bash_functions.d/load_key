@@ -1,16 +1,22 @@
 load_key() {
-    local _key_name
+    local _key_name _additional_args
 
     _key_name="${1}"
+
+    case $(uname) in
+        [Dd]arwin)
+            _additional_args='-K'
+            ;;
+    esac
 
     if echo "${_key_name}" | grep -q '/'; then
         # Try to load key by path
         test -r "${_key_name}" \
-            && ssh-add "${_key_name}"
+            && ssh-add ${_additional_args} "${_key_name}"
     else
         # Try to load key from home .ssh directory by name.
         test -r "${HOME}/.ssh/${_key_name}" \
-            && ssh-add "${HOME}/.ssh/${_key_name}"
+            && ssh-add ${_additional_args} "${HOME}/.ssh/${_key_name}"
     fi
 }
 
