@@ -28,40 +28,43 @@ install-mas:
 install-%:
 	brew install $*
 
+app-install-%:
+	brew cask install $*
+
 # -------------------------------- #
 # Applications configuration block #
 # -------------------------------- #
 
-productivity: requireapp-Karabiner \
-              requireapp-Seil \
-              requireapp-BetterTouchTool \
-              requireapp-Alfred\ 2
+productivity: \
+              app-install-karabiner-elements \
+              app-install-bettertouchtool \
+              app-install-alfred
 
-messangers: requireapp-Viber \
-            requireapp-Skype \
-            requireapp-Telegram
+messangers: \
+            app-install-skype \
+            app-install-telegram
 
-applications-requirements: productivity \
-                           messangers \
-                           requireapp-KeePassX \
-                           requireapp-Dropbox \
+applications-requirements: \
                            requireapp-Yandex.Disk \
-                           requireapp-VLC \
                            requireapp-Wunderlist \
-                           requireapp-VirtualBox \
                            requireapp-XCode
 
-karabiner: requireapp-Karabiner
-	$(mkfile_dir)/applications/karabiner.sh
-
-applications: applications-requirements \
-              karabiner
+applications: \
+              applications-requirements \
+              require-brew \
+              productivity \
+              messangers \
+              app-install-keepassx \
+              app-install-dropbox \
+              app-install-vlc \
+              app-install-virtualbox
 
 packages: require-brew \
           install-bash-completion \
           install-bash-git-prompt \
           install-git \
           install-vim \
+          install-jq \
           install-mas
 
 all: packages
