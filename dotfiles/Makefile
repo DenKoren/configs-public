@@ -13,6 +13,7 @@ ln-%:
 ln-karabiner.d:
 	@echo "Linking '$(mkfile_dir)/karabiner.d/configuration' to '$(HOME)/.karabiner.d/configuration'"
 	@rm -rf "$(HOME)/.karabiner.d/configuration"
+	@mkdir -p "$(HOME)/.karabiner.d"
 	@ln -fFs "$(mkfile_dir)/karabiner.d/configuration" "$(HOME)/.karabiner.d/configuration"
 
 configurations: ln-config

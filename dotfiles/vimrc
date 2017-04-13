@@ -37,6 +37,9 @@ autocmd VimEnter * echo "denkoren's vimrc version: 0.1"
         " }
        " "Files" {
             set fileencodings=ucs-bom,utf-8,cp1251
+            filetype on
+            filetype plugin on
+            filetype indent on
             "set fileformat=unix  " possibly not required ( :help 'fileformats' )
        " }
         " "Behaviour" {
@@ -122,3 +125,10 @@ autocmd VimEnter * echo "denkoren's vimrc version: 0.1"
             set wildignore+=*.o,*.obj,*.pyc,*.pyo,*.pyd,*.class,*.lock  " python
             set wildignore+=*.png,*.gif,*.jpg,*.ico                     " images
         " }
+    " }}
+" }
+" "Plugins" {
+    " "Basic" {{
+        execute pathogen#infect()
+    " }}
+" }
