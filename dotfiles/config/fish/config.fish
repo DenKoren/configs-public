@@ -15,6 +15,8 @@ set -g __fish_git_prompt_color_cleanstate green
 
 set -g PROJECT_HOME ~/work/personal
 
-eval (python3 -m virtualfish projects)
+if python -c "import virtualfish" 2>/dev/null
+    eval (python3 -m virtualfish projects)
+end
 
 source ~/.config/fish/iterm2_integration.fish

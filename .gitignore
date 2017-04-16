@@ -8,7 +8,13 @@ temp.*
 .*.swp
 .*.swo
 
-# Logs
+# Logs, histories, etc.
 *.log
+dotfiles/config/wireshark/recent
+dotfiles/config/wireshark/recent_common
 
-# .pyc
+# Other staff
+applications/com.googlecode.iterm2.plist
+
+*.pyc
+
