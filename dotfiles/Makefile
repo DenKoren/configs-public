@@ -24,8 +24,9 @@ bash: ln-profile \
       ln-bash_completion \
       ln-bash_completion.d \
       ln-bash_functions.d \
-      ln-bash_environments.d \
-      ln-karabiner.d
+      ln-bash_environments.d
+
+karabiner: ln-karabiner.d
 
 py: ln-pyrc
 
@@ -37,6 +38,7 @@ unison: ln-unison
 
 common: configurations \
         bash \
+        karabiner \
         py \
         mysql \
         vim

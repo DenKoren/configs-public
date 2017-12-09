@@ -19,4 +19,6 @@ if python -c "import virtualfish" 2>/dev/null
     eval (python3 -m virtualfish projects)
 end
 
+# To download shell integration script:
+#    curl -SsL https://iterm2.com/misc/fish_startup.in > ~/.config/fish/iterm2_integration.fish
 source ~/.config/fish/iterm2_integration.fish

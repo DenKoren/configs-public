@@ -1,0 +1,14 @@
+- hosts: localhost
+
+  vars:
+
+    homebrew_installed_packages:
+      - go
+
+    homebrew_cask_apps:
+      - phpstorm
+      - goland
+      - hipchat
+
+  roles:
+    - geerlingguy.homebrew

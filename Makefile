@@ -5,66 +5,43 @@ mkfile_dir := $(shell dirname $(mkfile_path))
 
 .DEFAULT_GOAL := all
 
-requireapp-%:
-	@echo "Checking application: '$*'"
-	@test -d "/Applications/$(*).app"
-
 require-%:
 	@echo "Checking requirement: '$*'"
 	@which $*
 
-install-powerline-fonts:
+powerline-fonts:
 	@git clone https://github.com/powerline/fonts.git
 	@./fonts/install.sh
 	@echo "Removing fonts installation directory"
 	@rm -rf ./fonts
 
-install-vim: install-powerline-fonts
-	brew install --override-system-vi vim
-
-install-mas:
-	brew install argon/mas/mas
-
-install-%:
+brew-%:
 	brew install $*
 
-app-install-%:
-	brew cask install $*
+galaxy-%:
+	@ansible-galaxy install $*
 
 # -------------------------------- #
 # Applications configuration block #
 # -------------------------------- #
 
-productivity: \
-              app-install-karabiner-elements \
-              app-install-bettertouchtool \
-              app-install-alfred
+ansible: \
+         require-brew \
+         brew-ansible \
+         galaxy-geerlingguy.homebrew \
+         galaxy-geerlingguy.mas
 
-messangers: \
-            app-install-skype \
-            app-install-telegram
+vim: powerline-fonts
+	@mkdir -p ~/.vim/autoload ~/.vim/bundle
+	@curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-applications-requirements: \
-                           requireapp-Yandex.Disk \
-                           requireapp-Wunderlist \
-                           requireapp-XCode
+common: ansible
+	ansible-playbook --ask-become-pass ansible/common.yaml
 
-applications: \
-              applications-requirements \
-              require-brew \
-              productivity \
-              messangers \
-              app-install-keepassx \
-              app-install-dropbox \
-              app-install-vlc \
-              app-install-virtualbox
+badoo: ansible
+	ansible-playbook --ask-become-pass ansible/badoo.yaml
 
-packages: require-brew \
-          install-bash-completion \
-          install-bash-git-prompt \
-          install-git \
-          install-vim \
-          install-jq \
-          install-mas
-
-all: packages
+all: \
+     common \
+     badoo \
+     vim

@@ -1,0 +1,37 @@
+# vim: nospell shiftwidth=2 :
+- hosts: localhost
+
+  vars:
+
+    mas_installed_apps:
+      - { id: 497799835, name: "XCode" }
+      - { id: 919269455, name: "Stufflt Expander" }
+      - { id: 560459030, name: "Yandex.Disk" }
+      - { id: 410628904, name: "Wunderlist" }
+
+    homebrew_installed_packages:
+      - bash-completion
+      - bash-git-prompt
+      - git
+      - jq
+      - fish
+      - { name: vim, install_options: "override-system-vi" }
+
+    homebrew_cask_apps:
+      - google-chrome
+      - firefox
+      - iterm2
+      - keepassx
+      - dropbox
+      - vlc
+      - virtualbox
+      - steam
+      - gog-galaxy
+      - wineskin-winery
+      - transmission
+      - skype
+      - telegram
+
+  roles:
+    - geerlingguy.homebrew
+    - geerlingguy.mas
