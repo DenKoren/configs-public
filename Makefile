@@ -34,6 +34,7 @@ ansible: \
 vim: powerline-fonts
 	@mkdir -p ~/.vim/autoload ~/.vim/bundle
 	@curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+	@echo "To download spell files, you always can use :verbose set spell command in VIM"
 
 common: ansible
 	ansible-playbook --ask-become-pass ansible/common.yaml

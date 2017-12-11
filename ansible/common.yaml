@@ -18,19 +18,28 @@
       - { name: vim, install_options: "override-system-vi" }
 
     homebrew_cask_apps:
+
+      # Browsers and network utilities
       - google-chrome
       - firefox
-      - iterm2
-      - keepassx
-      - dropbox
+      - transmission
+
+      # Gaming and entertainment
       - vlc
-      - virtualbox
       - steam
       - gog-galaxy
       - wineskin-winery
-      - transmission
+
+      # Messengers
       - skype
       - telegram
+      - whatsapp
+
+      # Others
+      - iterm2
+      - keepassx
+      - dropbox
+      - virtualbox
 
   roles:
     - geerlingguy.homebrew

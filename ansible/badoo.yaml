@@ -9,6 +9,7 @@
       - phpstorm
       - goland
       - hipchat
+      - sequel-pro
 
   roles:
     - geerlingguy.homebrew
