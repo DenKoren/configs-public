@@ -10,6 +10,10 @@ function git-check-add --description 'Check git diff before adding a file'
 		echo ""
 	end
 
+	function __repo_root
+		 command git rev-parse --show-toplevel
+	end
+
 	function __format_file
 		phpcf apply $argv
 	end
@@ -31,15 +35,18 @@ function git-check-add --description 'Check git diff before adding a file'
 		echo -n '] '
 	end
 
+	set _current_repo_root (__repo_root)
 
 	for _file in (__get_modified_files)
+		set _abs_path $_current_repo_root/$_file
+
 		__announce_section "File $_file"
-		__format_file $_file
-		git diff $_file
+		__format_file $_abs_path
+		git diff $_abs_path
 		read -l -p __get_confirmation_prompt correct
 
 		if [ $correct = 'y' ]
-			git add $_file
+			git add $_abs_path
 		end
 	end
 

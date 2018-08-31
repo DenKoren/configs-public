@@ -4,6 +4,9 @@
 
     homebrew_installed_packages:
       - go
+      - dep
+      - protobuf
+      - homebrew/php/php71
 
     homebrew_cask_apps:
       - phpstorm
