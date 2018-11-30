@@ -11,8 +11,8 @@
     homebrew_cask_apps:
       - phpstorm
       - goland
-      - hipchat
       - sequel-pro
+      - java
 
   roles:
     - geerlingguy.homebrew

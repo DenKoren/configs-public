@@ -41,6 +41,8 @@
       - keepassx
       - dropbox
       - virtualbox
+      - docker
+      - atom
 
   roles:
     - geerlingguy.homebrew
