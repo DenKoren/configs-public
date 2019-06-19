@@ -1,4 +1,9 @@
+# vim: set noexpandtab:
+
 function git-check-add --description 'Check git diff before adding a file'
+
+	set _format_php_cs \
+		're/jira-client.git'
 
 	function __announce_section
 		echo ""
@@ -11,11 +16,31 @@ function git-check-add --description 'Check git diff before adding a file'
 	end
 
 	function __repo_root
-		 command git rev-parse --show-toplevel
+		command git rev-parse --show-toplevel
 	end
 
-	function __format_file
+	function __get_repo_name
+		set _origin_url (command git config --get remote.origin.url)
+		string split --max 1 ':' $_origin_url | tail -n 1
+	end
+
+	function __format_file_php_cs
+		php-cs-fixer fix $argv
+	end
+
+	function __format_file_default
 		phpcf apply $argv
+	end
+
+	set _current_repo_name (__get_repo_name)
+	function __format_file \
+			--inherit-variable _format_php_cs \
+			--inherit-variable _current_repo_name
+		if contains $_current_repo_name $_format_php_cs
+			__format_file_php_cs $argv
+		else
+			__format_file_default $argv
+		end
 	end
 
 	function __get_modified_files
