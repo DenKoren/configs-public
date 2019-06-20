@@ -12,9 +12,10 @@ temp.*
 *.log
 dotfiles/config/wireshark/recent
 dotfiles/config/wireshark/recent_common
+dotfiles/config/yarn/
+ansible/common.retry
 
 # Other staff
 applications/com.googlecode.iterm2.plist
-
 *.pyc
 

@@ -13,6 +13,7 @@
       - goland
       - sequel-pro
       - java
+      - mattermost
 
   roles:
     - geerlingguy.homebrew

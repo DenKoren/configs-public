@@ -33,6 +33,7 @@ autocmd VimEnter * echo "denkoren's vimrc version: 0.1"
             set number
             set spelllang=ru_yo,en
             set spell
+            set spellcapcheck=
             set background=dark
         " }
        " "Files" {
