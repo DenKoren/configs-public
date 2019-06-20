@@ -38,7 +38,6 @@ unison: ln-unison
 
 common: configurations \
         bash \
-        karabiner \
         py \
         mysql \
         vim
@@ -46,4 +45,5 @@ common: configurations \
 server: common
 
 laptop: common \
+        karabiner \
         unison
