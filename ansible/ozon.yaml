@@ -1,0 +1,17 @@
+- hosts: localhost
+
+  vars:
+
+    homebrew_installed_packages:
+      - go
+      - dep
+      - protobuf
+
+    homebrew_cask_apps:
+      - goland
+      - sequel-pro
+      - java
+      - slack
+
+  roles:
+    - geerlingguy.homebrew

@@ -45,5 +45,4 @@ common: configurations \
 server: common
 
 laptop: common \
-        karabiner \
         unison

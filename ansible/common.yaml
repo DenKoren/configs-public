@@ -25,25 +25,19 @@
       - firefox
       - transmission
 
-      # Gaming and entertainment
-      - vlc
-      - steam
-      - gog-galaxy
-      - wineskin-winery
-      - playonmac
-
       # Messengers
       - skype
       - telegram
       - whatsapp
 
       # Others
+      - alfred
       - iterm2
       - keepassx
       - dropbox
+      - yandex-disk
       - virtualbox
       - docker
-      - atom
 
   roles:
     - geerlingguy.homebrew

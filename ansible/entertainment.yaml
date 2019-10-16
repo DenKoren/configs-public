@@ -1,0 +1,17 @@
+# vim: nospell shiftwidth=2 :
+- hosts: localhost
+
+  vars:
+
+    homebrew_cask_apps:
+
+      # Gaming and entertainment
+      - vlc
+      - steam
+      - gog-galaxy
+      - wineskin-winery
+      - playonmac
+
+  roles:
+    - geerlingguy.homebrew
+    - geerlingguy.mas

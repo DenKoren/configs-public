@@ -39,10 +39,9 @@ vim: powerline-fonts
 common: ansible
 	ansible-playbook --ask-become-pass ansible/common.yaml
 
-badoo: ansible
-	ansible-playbook --ask-become-pass ansible/badoo.yaml
+company-%: ansible
+	ansible-playbook --ask-become-pass ansible/$*.yaml
 
 all: \
      common \
-     badoo \
      vim
