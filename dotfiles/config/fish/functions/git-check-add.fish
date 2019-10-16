@@ -29,7 +29,7 @@ function git-check-add --description 'Check git diff before adding a file'
 	end
 
 	function __format_file_default
-		phpcf apply $argv
+		true
 	end
 
 	set _current_repo_name (__get_repo_name)
