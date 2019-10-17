@@ -1,1 +1,5 @@
 export GOPATH='/Users/denkoren/work/go'
+
+if command -v vg >/dev/null 2>&1; then
+    eval "$(vg eval --shell bash)"
+fi

@@ -4,7 +4,6 @@
 
     homebrew_installed_packages:
       - go
-      - dep
       - protobuf
 
     homebrew_cask_apps:
