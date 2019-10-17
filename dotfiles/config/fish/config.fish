@@ -9,7 +9,7 @@ function __prepend-to-path
 end
 
 # Configure environment
-find ~/.config/fish/environments.d -type f -name '*.fish' | while read file
+find ~/.config/fish/environments.d -type f -name '*' | while read file
     source $file
 end
 
