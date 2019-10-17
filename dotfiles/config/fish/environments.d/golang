@@ -1,3 +1,7 @@
 set GOPATH '/Users/denkoren/work/go'
 
 __prepend-to-path '/Users/denkoren/work/go/bin'
+
+if command -v vg >/dev/null 2>&1
+    vg eval --shell fish | source
+end
