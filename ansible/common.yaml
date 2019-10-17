@@ -38,6 +38,7 @@
       - yandex-disk
       - virtualbox
       - docker
+      - fluid
 
   roles:
     - geerlingguy.homebrew

@@ -5,6 +5,7 @@
     homebrew_installed_packages:
       - go
       - protobuf
+      - bats-core
 
     homebrew_cask_apps:
       - goland
