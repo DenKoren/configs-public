@@ -3,9 +3,12 @@
   vars:
 
     homebrew_installed_packages:
-      - go
+      - go@1.12
       - protobuf
       - bats-core
+      - npm
+      - shellcheck
+      - kubectl
 
     homebrew_cask_apps:
       - goland
