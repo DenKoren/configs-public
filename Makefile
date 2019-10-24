@@ -39,6 +39,9 @@ vim: powerline-fonts
 common: ansible
 	ansible-playbook --ask-become-pass ansible/common.yaml
 
+3d: ansible
+	ansible-playbook --ask-become-pass ansible/3d-printing.yaml
+
 company-%: ansible
 	ansible-playbook --ask-become-pass ansible/$*.yaml
 

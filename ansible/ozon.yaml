@@ -9,6 +9,7 @@
       - npm
       - shellcheck
       - kubectl
+      - python3
 
     homebrew_cask_apps:
       - goland

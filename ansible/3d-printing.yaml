@@ -1,0 +1,13 @@
+# vim: nospell shiftwidth=2 :
+- hosts: localhost
+
+  vars:
+
+    homebrew_cask_apps:
+
+      - arduino
+      - repetier-host
+      - ultimaker-cura
+
+  roles:
+    - geerlingguy.homebrew

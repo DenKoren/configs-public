@@ -1,5 +1,8 @@
 # JetBranis
 .idea
 
+# Python
+venv
+
 # Mac OS X - specific
 .DS_Store
