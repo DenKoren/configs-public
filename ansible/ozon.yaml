@@ -16,6 +16,7 @@
       - sequel-pro
       - java
       - slack
+      - bloomrpc
 
   roles:
     - geerlingguy.homebrew
