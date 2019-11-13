@@ -9,7 +9,11 @@
       - npm
       - shellcheck
       - kubectl
+      - kubectx
       - python3
+      - derailed/k9s/k9s
+      - stern
+      - golangci/tap/golangci-lint
 
     homebrew_cask_apps:
       - goland
