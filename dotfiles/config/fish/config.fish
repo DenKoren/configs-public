@@ -12,4 +12,3 @@ end
 find ~/.config/fish/environments.d -type f -name '*' | while read file
     source $file
 end
-

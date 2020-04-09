@@ -13,6 +13,7 @@
       - bash-completion
       - bash-git-prompt
       - git
+      - git-lfs
       - jq
       - bat
       - fish

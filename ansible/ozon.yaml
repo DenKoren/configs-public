@@ -21,6 +21,7 @@
       - java
       - slack
       - bloomrpc
+      - tunnelblick
 
   roles:
     - geerlingguy.homebrew
