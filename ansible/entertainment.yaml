@@ -6,7 +6,6 @@
     homebrew_cask_apps:
 
       # Gaming and entertainment
-      - vlc
       - steam
       - gog-galaxy
       - wineskin-winery

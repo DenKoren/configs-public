@@ -33,6 +33,7 @@
       - whatsapp
 
       # Others
+      - vlc
       - alfred
       - iterm2
       - keepassx
