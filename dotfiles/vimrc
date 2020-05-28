@@ -37,6 +37,8 @@ autocmd VimEnter * echo "denkoren's vimrc version: 0.1"
             set background=dark
         " }
        " "Files" {
+            set modeline
+            set modelines=5
             set fileencodings=ucs-bom,utf-8,cp1251
             filetype on
             filetype plugin on
