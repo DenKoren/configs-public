@@ -28,6 +28,7 @@ galaxy-%:
 ansible: \
          require-brew \
          brew-ansible \
+         brew-mas \
          galaxy-geerlingguy.homebrew \
          galaxy-geerlingguy.mas
 
