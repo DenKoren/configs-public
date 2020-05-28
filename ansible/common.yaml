@@ -1,4 +1,5 @@
-# vim: nospell shiftwidth=2 :
+# vim: set nospell shiftwidth=2:
+
 - hosts: localhost
 
   vars:
@@ -7,7 +8,7 @@
       - { id: 497799835, name: "XCode" }
       - { id: 919269455, name: "Stufflt Expander" }
       - { id: 560459030, name: "Yandex.Disk" }
-      - { id: 410628904, name: "Wunderlist" }
+      - { id: 1274495053, name: "Microsoft To Do" }
 
     homebrew_installed_packages:
       - bash-completion
