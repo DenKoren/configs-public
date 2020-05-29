@@ -6,16 +6,15 @@
   vars:
 
     homebrew_installed_packages:
-      - go
+      - go@1.13
       - protobuf
-      - homebrew/php/php71
+      - python3
+      - golangci/tap/golangci-lint
 
     homebrew_cask_apps:
-      - phpstorm
       - goland
-      - sequel-pro
       - java
-      - mattermost
+      - bloomrpc
 
   roles:
     - geerlingguy.homebrew
