@@ -10,13 +10,13 @@
       - protobuf
       - python3
       - golangci/tap/golangci-lint
-      - osxfuse
 
     homebrew_cask_apps:
       - goland
       - java
       - bloomrpc
       - zoomus
+      - osxfuse
 
   roles:
     - geerlingguy.homebrew
