@@ -15,7 +15,7 @@
       - goland
       - java
       - bloomrpc
-      - zoom
+      - zoomus
 
   roles:
     - geerlingguy.homebrew
