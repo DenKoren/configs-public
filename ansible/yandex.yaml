@@ -6,10 +6,11 @@
   vars:
 
     homebrew_installed_packages:
-      - go@1.13
+      - go
       - protobuf
       - python3
       - golangci/tap/golangci-lint
+      - osxfuse
 
     homebrew_cask_apps:
       - goland
