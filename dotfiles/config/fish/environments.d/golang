@@ -1,6 +1,5 @@
 set -gx GOPATH '/Users/denkoren/go'
-
-#__prepend-to-path '/Users/denkoren/go/bin'
+__prepend-to-path $GOPATH/bin
 
 if command -v vg >/dev/null 2>&1
     vg eval --shell fish | source

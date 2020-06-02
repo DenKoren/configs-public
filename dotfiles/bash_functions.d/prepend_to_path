@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Let's define function to add some path's to PATH variable:
+prepend_to_path ()
+{
+	local _path_to_add
+	_path_to_add="${1}"
+
+	if [ -d "${_path_to_add}" ]; then
+		if echo ${PATH} | grep -vq "${_path_to_add}"; then
+			PATH="${_path_to_add}:${PATH}"
+		fi
+	fi
+}
+
+complete -o dirnames prepend_to_path
