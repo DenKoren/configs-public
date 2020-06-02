@@ -1,4 +1,4 @@
-export GOPATH='/Users/denkoren/go'
+export GOPATH="${HOME}/go"
 prepend_to_path "${GOPATH}/bin"
 
 if command -v vg >/dev/null 2>&1; then

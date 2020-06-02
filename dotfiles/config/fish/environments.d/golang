@@ -1,4 +1,4 @@
-set -gx GOPATH '/Users/denkoren/go'
+set -gx GOPATH $HOME/go
 __prepend-to-path $GOPATH/bin
 
 if command -v vg >/dev/null 2>&1
