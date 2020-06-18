@@ -6,8 +6,16 @@
   vars:
 
     mas_installed_apps:
+      # Apple software
+      - { id: 409201541, name: "Pages" }
+      - { id: 409203825, name: "Numbers" }
       - { id: 497799835, name: "XCode" }
+
+      # Utils and productivity
       - { id: 919269455, name: "Stufflt Expander" }
+      - { id: 441258766, name: "Magnet" }
+
+      # Clouds
       - { id: 560459030, name: "Yandex.Disk" }
       - { id: 1274495053, name: "Microsoft To Do" }
 
@@ -20,6 +28,7 @@
       - yq
       - bat
       - fish
+      - wget
       - { name: vim, install_options: "override-system-vi" }
 
     homebrew_cask_apps:
