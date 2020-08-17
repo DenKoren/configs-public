@@ -104,10 +104,18 @@ function fish_prompt --description 'Write out the prompt'
 		end
 	end
 
+	function __fish_yc_prompt --description "Check if yc prompt generator if available and use it"
+		if type -q _yc-prompt
+			echo -n -s " "
+			_yc-prompt
+		end
+	end
+
 	echo -n -s \
 		"[$current_time]" ' '\
 		(set_color $color_cwd) (prompt_pwd) $normal \
 		(set_color white) "$current_py_venv" $normal \
+		(__fish_yc_prompt) $normal \
 		(fish_git_prompt) $normal \
 		(__fish_arc_prompt) $normal \
 		\n \
