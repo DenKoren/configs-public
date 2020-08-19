@@ -35,6 +35,8 @@ alias gidi='git diff'
 alias gia='git add'
 alias gicm='git checkout master'
 
+alias bell="printf \$'\7'"
+
 ###########
 ## LINUX ##
 ###########
