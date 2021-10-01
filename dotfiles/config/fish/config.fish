@@ -5,7 +5,9 @@
 #
 
 function __prepend-to-path
-    set PATH $argv $PATH
+    if [ -e $argv ]
+        set PATH $argv $PATH
+    end
 end
 
 # Configure environment

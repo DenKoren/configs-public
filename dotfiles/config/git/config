@@ -1,6 +1,6 @@
 [user]
 	name = Korenevskiy Denis
-	email = denkoren@ozon.ru
+	email = denkoren@yandex.ru
 [color]
 	ui = true
 #[merge]
@@ -22,3 +22,7 @@
     insteadOf="https://gitlab.ozon.ru/"
 [gpg]
 	program = gpg
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master

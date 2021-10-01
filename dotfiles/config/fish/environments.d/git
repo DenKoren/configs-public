@@ -1,0 +1,5 @@
+alias gipu='git pull'
+alias gist='git status'
+alias gidi='git diff'
+alias gia='git add'
+alias gicm='git checkout master'
