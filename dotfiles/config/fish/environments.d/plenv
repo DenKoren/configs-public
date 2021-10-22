@@ -1,3 +1,3 @@
-if plenv >/dev/null 2>/dev/null
+if type -q plenv
     status --is-interactive; and . (plenv init -|psub)
 end

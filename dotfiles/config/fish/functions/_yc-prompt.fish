@@ -6,7 +6,7 @@ function _yc-prompt --description 'Write active Yandex.Cloud profile name for ad
 		printf '%s' $profile
 	end
 
-	if yc version >/dev/null 2>&1
+	if type -q yc
 		set_color blue
 		printf '(%s)' (__fish_yc_current_profile)
 		set_color normal
