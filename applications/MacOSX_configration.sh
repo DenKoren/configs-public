@@ -15,7 +15,7 @@ To setup Mozilla Firefox for Tree Style Tab extension:
 * Open Firefox -> Help -> Troubleshooting information
 * Copy profile path
 * Create <firefox profile path>/chrome/userChrome.css file with contents:
-  ```
+  \`\`\`
   /* hides the native tabs */
   #TabsToolbar {
     visibility: collapse;
@@ -25,7 +25,7 @@ To setup Mozilla Firefox for Tree Style Tab extension:
   #titlebar {
     visibility: collapse;
   }
-  ```
+  \`\`\`
 * Open about:config
 * Change toolkit.legacyUserProfileCustomizations.stylesheets to true
 * Restart Firefox

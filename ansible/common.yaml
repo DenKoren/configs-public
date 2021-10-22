@@ -53,7 +53,7 @@
       - yandex-disk
       - virtualbox
       - docker
-      - fluid
+      - webcatalog
 
   roles:
     - geerlingguy.homebrew
