@@ -19,7 +19,7 @@ brew-%:
 	brew install $*
 
 galaxy-%:
-	@ansible-galaxy install $*
+	@ansible-galaxy collection install $*
 
 # -------------------------------- #
 # Applications configuration block #
@@ -29,8 +29,7 @@ ansible: \
          require-brew \
          brew-ansible \
          brew-mas \
-         galaxy-geerlingguy.homebrew \
-         galaxy-geerlingguy.mas
+         galaxy-geerlingguy.mac
 
 vim: powerline-fonts
 	@mkdir -p ~/.vim/autoload ~/.vim/bundle
@@ -43,9 +42,10 @@ common: ansible
 3d: ansible
 	ansible-playbook --ask-become-pass ansible/3d-printing.yaml
 
-company-%: ansible
+ansible-%: ansible
 	ansible-playbook --ask-become-pass ansible/$*.yaml
 
 all: \
      common \
-     vim
+     vim \
+     ansible-common

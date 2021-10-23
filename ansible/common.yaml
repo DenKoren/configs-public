@@ -26,6 +26,7 @@
       - git-lfs
       - jq
       - yq
+      - pv
       - bat
       - fish
       - wget
