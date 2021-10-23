@@ -29,7 +29,8 @@
       - bat
       - fish
       - wget
-      - { name: vim, install_options: "override-system-vi" }
+      - p7zip
+      - vim
 
     homebrew_cask_apps:
 
