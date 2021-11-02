@@ -12,6 +12,7 @@
       - aws-cdk
 
     homebrew_cask_apps:
+      - aws-vault
       - phpstorm
       - goland
       - intellij-idea
