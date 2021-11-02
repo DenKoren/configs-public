@@ -1,0 +1,22 @@
+#!/usr/bin/env ansible-playbook --ask-become-pass
+# vim: set nospell shiftwidth=2:
+
+- hosts: localhost
+
+  vars:
+
+    homebrew_installed_packages:
+      - go
+      - protobuf
+      - awscli
+      - aws-cdk
+
+    homebrew_cask_apps:
+      - phpstorm
+      - goland
+      - intellij-idea
+      - pycharm
+      - sequel-pro
+
+  roles:
+    - geerlingguy.homebrew
