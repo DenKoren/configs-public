@@ -15,6 +15,9 @@ powerline-fonts:
 	@echo "Removing fonts installation directory"
 	@rm -rf ./fonts
 
+brewtaps:
+	brew tap homebrew/cask-versions
+
 brew-%:
 	brew install $*
 
@@ -27,6 +30,7 @@ galaxy-%:
 
 ansible: \
          require-brew \
+         brewtaps \
          brew-ansible \
          brew-mas \
          galaxy-geerlingguy.mac

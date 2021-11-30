@@ -10,7 +10,6 @@
       - protobuf
       - awscli
       - aws-cdk
-      - openjdk@17
 
     homebrew_cask_apps:
       - aws-vault
@@ -19,6 +18,7 @@
       - intellij-idea
       - pycharm
       - sequel-pro
+      - temurin11
 
   roles:
     - geerlingguy.homebrew
