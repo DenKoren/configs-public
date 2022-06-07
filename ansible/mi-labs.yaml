@@ -19,6 +19,7 @@
       - pycharm
       - sequel-pro
       - temurin11
+      - bloomrpc
 
   roles:
     - geerlingguy.homebrew

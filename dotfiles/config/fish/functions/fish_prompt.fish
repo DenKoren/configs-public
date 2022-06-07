@@ -112,6 +112,7 @@ function fish_prompt --description 'Write out the prompt'
 	end
 
 	echo -n -s \
+		(iterm2_prompt_mark) \
 		"[$current_time]" ' '\
 		(set_color $color_cwd) (prompt_pwd) $normal \
 		(set_color white) "$current_py_venv" $normal \
