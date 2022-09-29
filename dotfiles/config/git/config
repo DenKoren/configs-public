@@ -17,9 +17,8 @@
 	st = status
 [push]
 	default = simple
+	autoSetupRemote = true
 
-[url "git@gitlab.ozon.ru:"]
-    insteadOf="https://gitlab.ozon.ru/"
 [gpg]
 	program = gpg
 [pull]
