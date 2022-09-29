@@ -25,3 +25,6 @@
 	rebase = false
 [init]
 	defaultBranch = master
+
+[url "git@github.com:milaboratory/"]
+	insteadOf = https://github.com/milaboratory/
