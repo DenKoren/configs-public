@@ -33,6 +33,7 @@
       - p7zip
       - vim
       - wireguard-tools
+      - ipcalc
 
     homebrew_cask_apps:
 
