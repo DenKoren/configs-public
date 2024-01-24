@@ -15,7 +15,12 @@ file_user="${HOME}/.config/local-routing-rules.txt"
 file_for_calc="${cache_dir}/russian_subnets_list_raw_for_calc.txt"
 file_processed="${cache_dir}/russian_subnets_list_processed.txt"
 
-function ProgressBar() {
+if [ "$( id -u )" -ne 0 ]; then
+    echo "Script requires super-user privileges. Run with sudo."
+    exit 1
+fi
+
+function progress_bar() {
   local _msg="${1}"
   local _cur="${2}"
   local _total="${3}"
@@ -26,14 +31,7 @@ function ProgressBar() {
 
   _fill=$(printf "%${_done}s")
   _empty=$(printf "%${_left}s")
-  printf "\r${_msg} (${_cur}/${_total}): [${_fill// /#}${_empty// /-}] ${_progress}%%"
-}
-
-function wait_network() 
-{
-    while ! route -q get default 2>/dev/null; do 
-        sleep 1
-    done
+  printf "\r${_msg} (${_cur}/${_total}): [${_fill// /#}${_empty// /-}] ${_progress}%% "
 }
 
 function wait_routing()
@@ -42,14 +40,15 @@ function wait_routing()
     local _gw="10.110.011.01"
 
     # First ensure the route is not in the table
-    route delete "${_test_route}" >/dev/null 2>/dev/null || true
+    route -q delete "${_test_route}" >/dev/null 2>/dev/null || true
 
     while route add -net "${_test_route}" "${_gw}" 2>&1 | 
-            grep -q 'Network is unreachable'; do
+        grep -q 'Network is unreachable'; do
         sleep 1
     done
 
-    route delete "${_test_route}" >/dev/null 2>/dev/null || true
+    route -q delete "${_test_route}" >/dev/null 2>/dev/null || true
+    sleep 3
 }
 
 function reference ()
@@ -57,7 +56,7 @@ function reference ()
         cat <<EndOfReference
 
         ${script_name} requires ${required_params} parameters
-            ${script_name} interface_name
+            ${script_name} interface_name [set|cleanup]
 
         Say, ${script_name} en1
         To get interface name you use for internet access, use 'networksetup -listnetworkserviceorder'
@@ -65,7 +64,89 @@ function reference ()
 EndOfReference
 }
 
-if [ "$#" -ne "${required_params}" ]; then
+function cleanup_routes() {
+    local _interface="${1}"
+    local _routes_count_all=0
+    local _routes_count_current=0
+
+    # Flush route table
+    echo "Flush route table (down interface '${_interface}')..."
+    ifconfig "${_interface}" down
+
+    echo "Getting the list of old custom routes..."
+    netstat -nr -f inet | 
+        grep 'UCSc' |
+        awk -v "iface=${_interface}" '$4 == iface{print $1}' \
+            > "${file_custom_routes}"
+
+    _routes_count_all=$( wc -l <"${file_custom_routes}" | awk '{print $1}' )
+    _routes_count_current=0
+
+    if [ "${_routes_count_all}" -eq 0 ]; then
+        echo "No old routes found for '${_interface}'"
+    else
+        while read -r route; do
+            route -n delete -net "${route}" >/dev/null
+
+            (( _routes_count_current += 1 ))
+            progress_bar "Removing old routes" "${_routes_count_current}" "${_routes_count_all}"
+
+        done <"${file_custom_routes}"
+        echo ""
+    fi
+
+    echo "Bring interface '${_interface}' back..."
+    ifconfig "${_interface}" up
+
+    echo "Waiting for routing control working"
+    wait_routing
+}
+
+function get_rus_network_list() {
+    local _destination="${1}"
+
+    # Get addresses RU segment
+    echo "Download RU subnets..."
+    curl \
+        --progress-bar \
+        "https://stat.ripe.net/data/country-resource-list/data.json?resource=ru" | 
+        jq -r ".data.resources.ipv4[]" > "${file_raw}"
+
+    echo "Deaggregate subnets..."
+    grep "-" "${file_raw}" > "${file_for_calc}"
+    grep -v "-" "${file_raw}" >> "${_destination}"
+
+    while read -r route; do
+        ipcalc "${route}" |
+            grep -v "deaggregate" >> "${_destination}"
+    done < "${file_for_calc}"
+
+    if [ -f "${file_user}"  ]; then 
+        echo "Add user subnets..."; 
+        grep -v "#" "${file_user}" >> "${_destination}"
+    fi
+}
+
+function add_routes() {
+    local _routes="${1}"
+    local _interface="${2}"
+
+    local _routes_count_all=0
+    local _routes_count_current=0
+
+    _routes_count_all=$( wc -l <"${_routes}" | awk '{print $1}' )
+    _routes_count_current=0
+    while read -r route; do
+        route -n add -inet "${route}" -interface "${_interface}" >/dev/null
+
+        (( _routes_count_current += 1 ))
+        progress_bar "Adding new routes" "${_routes_count_current}" "${_routes_count_all}"
+
+    done <"${_routes}"
+    echo ""
+}
+
+if [ "$#" -lt "${required_params}" ]; then
         reference
         exit 64
 fi
@@ -74,76 +155,24 @@ fi
 cd "${script_dir}"
 mkdir -p "${cache_dir}"
 
-if [ "$( id -u )" -ne 0 ]; then
-    echo "Script requires super-user privileges. Run with sudo."
-    exit 1
-fi
-
 # Call parameters
 interface="${1}"
+action="${2:-}" # 'cleanup' or 'set'. Empty value == both
 
-default_gateway=$( 
-    netstat -nr -f inet | 
-        awk '/default/ { print $2 }'
-)
+if [ -z "${action}" ] || [ "${action}" = "cleanup" ]; then
+    
+    cleanup_routes "${interface}"
 
-# Get addresses RU segment
-echo "Download RU subnets..."
-curl \
-    --progress-bar \
-    "https://stat.ripe.net/data/country-resource-list/data.json?resource=ru" | 
-    jq -r ".data.resources.ipv4[]" > "${file_raw}"
-
-# Flush route table
-echo "Flush route table (down interface '${interface}')..."
-ifconfig "${interface}" down
-
-echo "Getting the list of old custom routes..."
-netstat -nr -f inet | awk -v "iface=${interface}" '$4 == iface{print $1}' > "${file_custom_routes}"
-
-echo "Bring interface '${interface}' back..."
-ifconfig "${interface}" up
-
-echo "Deaggregate subnets..."
-grep "-" "${file_raw}" > "${file_for_calc}"
-grep -v "-" "${file_raw}" > "${file_processed}"
-
-while read -r line; do
-    ipcalc "${line}" |
-        grep -v "deaggregate" >> "${file_processed}"
-done < "${file_for_calc}"
-
-if [ -f "${file_user}"  ]; then 
-    echo "Add user subnets..."; 
-    grep -v "#" "${file_user}" >> "${file_processed}"
 fi
 
-routes_count_all=$( wc -l <"${file_custom_routes}" | awk '{print $1}' )
-routes_count_current=0
-echo "Old routes count: ${routes_count_all}"
-while read -r route; do
-    route -n delete "${route}" >/dev/null
+if [ -z "${action}" ] || [ "${action}" = "set" ]; then
     
-    (( routes_count_current += 1 ))
-    ProgressBar "Removing old routes" "${routes_count_current}" "${routes_count_all}"
+    : > "${file_processed}"
 
-done <"${file_custom_routes}"
-echo ""
+    get_rus_network_list "${file_processed}"
+    add_routes "${file_processed}" "${interface}"
 
-echo "Waiting for network connection to appear to get 'route' control working"
-wait_network
-wait_routing
-
-routes_count_all=$( wc -l <"${file_processed}" | awk '{print $1}' )
-routes_count_current=0
-while read -r line; do
-    route -n add -net "${line}" "${default_gateway}" >/dev/null
-
-    (( routes_count_current += 1 ))
-    ProgressBar "Adding new routes" "${routes_count_current}" "${routes_count_all}"
-
-done <"${file_processed}"
-echo ""
+fi
 
 echo "Removing temp files..."
 rm -r "${cache_dir}"
