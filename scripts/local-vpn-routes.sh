@@ -29,9 +29,10 @@ function progress_bar() {
   (( _done = ( "${_progress}" * 4 ) / 10 ))
   (( _left = 40 - "${_done}" ))
 
+  _h='#' # just to not make some shell syntax highliters crazy
   _fill=$(printf "%${_done}s")
   _empty=$(printf "%${_left}s")
-  printf "\r${_msg} (${_cur}/${_total}): [${_fill// /#}${_empty// /-}] ${_progress}%% "
+  printf "\r${_msg} (${_cur}/${_total}): [${_fill// /$_h}${_empty// /-}] ${_progress}%% "
 }
 
 function wait_routing()
@@ -72,9 +73,10 @@ function cleanup_routes() {
     # Flush route table
     echo "Flush route table (down interface '${_interface}')..."
     ifconfig "${_interface}" down
+    route -n flush
 
     echo "Getting the list of old custom routes..."
-    netstat -nr -f inet | 
+    netstat -nr -f inet |
         grep 'UCSc' |
         awk -v "iface=${_interface}" '$4 == iface{print $1}' \
             > "${file_custom_routes}"
@@ -160,7 +162,7 @@ interface="${1}"
 action="${2:-}" # 'cleanup' or 'set'. Empty value == both
 
 if [ -z "${action}" ] || [ "${action}" = "cleanup" ]; then
-    
+
     cleanup_routes "${interface}"
 
 fi
