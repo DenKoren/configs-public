@@ -73,7 +73,7 @@ function cleanup_routes() {
     # Flush route table
     echo "Flush route table (down interface '${_interface}')..."
     ifconfig "${_interface}" down
-    route -n flush
+    route -nq flush
 
     echo "Getting the list of old custom routes..."
     netstat -nr -f inet |
@@ -135,11 +135,17 @@ function add_routes() {
 
     local _routes_count_all=0
     local _routes_count_current=0
+    local _default_gateway
+
+    _default_gateway=$(
+        netstat -nr -f inet |
+        awk '/default/ { print $2 }'
+    )
 
     _routes_count_all=$( wc -l <"${_routes}" | awk '{print $1}' )
     _routes_count_current=0
     while read -r route; do
-        route -n add -inet "${route}" -interface "${_interface}" >/dev/null
+        route -n add -net "${route}" "${_default_gateway}" >/dev/null
 
         (( _routes_count_current += 1 ))
         progress_bar "Adding new routes" "${_routes_count_current}" "${_routes_count_all}"
@@ -168,7 +174,7 @@ if [ -z "${action}" ] || [ "${action}" = "cleanup" ]; then
 fi
 
 if [ -z "${action}" ] || [ "${action}" = "set" ]; then
-    
+
     : > "${file_processed}"
 
     get_rus_network_list "${file_processed}"

@@ -22,18 +22,19 @@
     homebrew_installed_packages:
       - bash-completion
       - bash-git-prompt
-      - git
-      - git-lfs
-      - jq
-      - yq
-      - pv
       - bat
       - fish
-      - wget
-      - p7zip
-      - vim
-      - wireguard-tools
+      - git
+      - git-lfs
       - ipcalc
+      - jq
+      - jump
+      - p7zip
+      - pv
+      - vim
+      - wget
+      - wireguard-tools
+      - yq
 
     homebrew_cask_apps:
 
