@@ -9,5 +9,5 @@ function mi.pl.level --description 'Get records with given logging level'
 
 	jq --compact-output \
 		--arg lvl $level \
-		'select(.level | contains($lvl))'
+		'select(.level | test($lvl))'
 end
