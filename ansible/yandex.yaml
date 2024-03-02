@@ -20,4 +20,4 @@
       - osxfuse
 
   roles:
-    - geerlingguy.homebrew
+    - geerlingguy.mac.homebrew

@@ -1,5 +1,7 @@
 # Turn of mouse speed scaling (acceleration)
 defaults write GlobalPreferences com.apple.mouse.scaling -1
+defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain AutomaticQuoteSubstitutionEnabled -bool false
 
 # Allow fish to be default shell for Mac OS X users
 if ! grep -q /usr/local/bin/fish /etc/shells; then

@@ -48,7 +48,7 @@
 
       # Messengers
       - telegram
-      - whatsapp
+      #- whatsapp
       - skype
       - zoom
 
@@ -56,15 +56,15 @@
       - vlc
       - alfred
       - iterm2
-      - keepassx
+      - keepassxc
       - dropbox
       - yandex-disk
 
       # Development
-      - jetbrains-toolbox
+      #- jetbrains-toolbox
       - docker
       - virtualbox
 
   roles:
-    - geerlingguy.homebrew
-    - geerlingguy.mas
+    - geerlingguy.mac.homebrew
+    - geerlingguy.mac.mas

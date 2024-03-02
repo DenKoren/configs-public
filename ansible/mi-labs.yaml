@@ -12,15 +12,16 @@
       - awscli
       - aws-cdk
 
-    homebrew_cask_apps:
+      # Casks
       - aws-vault
-      - phpstorm
-      - goland
-      - intellij-idea
-      - pycharm
+      - visual-studio-code
+      #- phpstorm
+      #- goland
+      #- intellij-idea
+      #- pycharm
       - sequel-pro
       - temurin11
       - bloomrpc
 
   roles:
-    - geerlingguy.homebrew
+    - geerlingguy.mac.homebrew
