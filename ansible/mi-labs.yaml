@@ -11,6 +11,7 @@
       - protobuf
       - awscli
       - aws-cdk
+      - pkgconfig
 
       # Casks
       - aws-vault
@@ -22,6 +23,8 @@
       - sequel-pro
       - temurin11
       - bloomrpc
+      - element
+      - notion
 
   roles:
     - geerlingguy.mac.homebrew
